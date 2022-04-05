@@ -1,0 +1,484 @@
+using System;
+using System.IO;
+using System.Linq;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace CSharp_Shell
+{
+	
+    public class Party
+    {
+    	public string name;
+    	public string sname;
+    	public int score;
+    	public bool active;
+    	public int reputation;
+    }
+    
+    public class Ability
+    {
+    	public string name;
+    	public bool active;
+    	public int amount;
+    		
+    	public void activefakevote()
+    	{
+    	     
+    	}
+    	
+    }
+    
+    public static class Vote
+    {
+    	public static bool startElection;
+    	public static bool unknownvote;
+    	public static string vote;
+    	public static string _fullname;
+    	public static string _shortname;
+    	
+    	public static void yourvote()
+    	{
+    		vote = Console.ReadLine();
+           	if (!unknownvote)
+           	{
+           		
+           		
+           	    if (vote == "KJP" || vote == "ABP" || vote == "CPK" || vote == "KNP" || vote == "PPP")
+           	    {
+           		    Console.WriteLine("You have voted for " + vote);
+           		    startElection = true;
+           	    }
+                else
+                {
+           	        Console.WriteLine("You are creating a new party named " + vote + "!");
+           		    Console.WriteLine("Are you sure? (Yes/No)");
+           	        string createParty = Console.ReadLine();
+           	   
+           	        if (createParty == "Yes")
+           	        {
+           	    	    Console.WriteLine("Write full name of your party.");
+           	    	    _fullname = Console.ReadLine();
+           	    	    Console.WriteLine("Write sort name.");
+           	    	    _shortname = Console.ReadLine();
+           		        Console.WriteLine("You have voted " + vote + ". You're leader of this party.");
+           			    
+           			    startElection = true;
+           			    unknownvote = true;
+           			     
+           			    Console.WriteLine("How much do you want to spend for elections?");
+           			    int spend = Convert.ToInt32(Console.ReadLine());
+           	        }
+           	        else if (createParty == "No")
+           	        {
+           			    startElection = true;
+           			    unknownvote = false;
+                    }
+                }
+           	}
+           	else
+           	{
+           		if (vote == "KJP" || vote == "ABP" || vote == "CPK" || vote == "KNP" || vote == "PPP" || vote == _shortname)
+           	    {
+           		    Console.WriteLine("You have voted for " + vote);
+           	    }
+           	}
+    	}
+    }
+    
+    public class Location
+    {
+    	public string name;
+    }
+    
+    public static class Electionloc
+    {
+    	public static bool checklevel = true;
+    	public static int levelup = 0;
+    	public static string currentloc = "N/A";
+    	
+        public static void locations()
+        {
+        	Location location1 = new Location();
+            location1.name = "Dadragarh";
+            Location location2 = new Location();
+            location2.name = "Candham";
+            Location location3 = new Location();
+            location3.name = "Khuskart";
+            Location location4 = new Location();
+            location4.name = "Deltrappa";
+            Location location5 = new Location();
+            location5.name = "Di7";
+          
+            if (levelup <= 4)
+            {
+                currentloc = location1.name;
+            }
+            else if (levelup <= 9)
+            {
+                currentloc = location2.name;
+            }
+            else if (levelup <= 14)
+            {
+                currentloc = location3.name;
+            }
+            else if (levelup <= 19)
+            {
+                currentloc = location4.name;
+            }
+            else if (levelup <= 25)
+            {
+                currentloc = location5.name;
+            }
+            
+            Console.WriteLine("Location: " + currentloc);
+        }
+    }
+    
+    public class Voter_ID
+    {
+    	public static string username;
+    	public static int age;
+    	public static float code;
+    	public static string _continue;
+    	
+    	public static void VoterId()
+    	{
+    		var _code = new Random();
+    		
+    		if (Electionloc.levelup == 0)
+    		{
+    			Console.WriteLine("               VOTER ID");
+    		    Console.WriteLine("Name: " + username);
+    		    Console.WriteLine("Age: " + age);
+    		    code = _code.Next(10000, 99999);
+    		    Console.WriteLine("ID No. " + code);
+    		    Console.WriteLine("");
+    		
+    		    Console.WriteLine("(Press enter to continue)");
+    		    _continue = Console.ReadLine();
+    		
+    		    if (_continue == "")
+    		    {
+    			
+    		    }
+    		}
+    		else
+    		{
+    			Console.WriteLine("-------------------------------------");
+    			Console.WriteLine("               VOTER ID");
+    		    Console.WriteLine("Name: " + username);
+    		    Console.WriteLine("Age: " + age);
+    		    Console.WriteLine("ID No. " + code);
+    		    Console.WriteLine("");
+    		    Console.WriteLine("(Press enter to continue)");
+    		    _continue = Console.ReadLine();
+    	        
+    	        if (_continue == "")
+    	        {
+    	        	
+    	        }
+    		}
+    	}
+    }
+    
+    public class Money
+    {
+    	public static int amount = 12000;
+    	public static int maxamount = 20000;
+    	
+    	public void fullstorage()
+    	{
+            if (amount > maxamount)
+            {
+        	    Console.WriteLine("Storage is full. Buy a level 2 storage.");
+            }
+    	}
+    }
+    
+    public static class Program 
+    {
+        public static void Main(string[] args) 
+        {
+            Party party1 = new Party();
+            party1.name = "Kuserati Janata Party";
+            party1.sname = "KJP";
+            party1.score = 0;
+            party1.reputation = 1;
+            party1.active = true;
+            Party party2 = new Party();
+            party2.name = "Atmanirbhar Party";
+            party2.sname = "ABP";
+            party2.score = 0;
+            party2.reputation = 1;
+            party2.active = true;
+            Party party3 = new Party();
+            party3.name = "Communist Party of Kuserat";
+            party3.sname = "CPK";
+            party3.score = 0;
+            party3.reputation = 1;
+            party3.active = true;
+            Party party4 = new Party();
+            party4.name = "Kuserati National Party";
+            party4.sname = "KNP";
+            party4.score = 0;
+            party4.reputation = 1;
+            party4.active = true;
+            Party party5 = new Party();
+            party5.name = "People's Party";
+            party5.sname = "PPP";
+            party5.score = 0;
+            party5.reputation = 1;
+            party5.active = true;
+            Party party6 = new Party();
+            party6.name = Vote._fullname;
+            party6.sname = Vote._shortname;
+            party6.score = 0;
+            party6.reputation = 1;
+            party6.active = false;
+            Ability ability1 = new Ability();
+            ability1.name = "Fake Vote";
+            ability1.active = false;
+            ability1.amount = 0;
+            Ability ability2 = new Ability();
+            ability2.name = "Religious vote";
+            ability2.active = false;
+            ability2.amount = 0;
+            
+            //Just some variables
+            Vote.startElection = false;
+        	//Some Lists
+        	List<Party> parties = new List<Party>();
+            parties.Add(party1);
+            parties.Add(party2);
+            parties.Add(party3);
+            parties.Add(party4);
+            parties.Add(party5);
+            parties.Add(party6);
+            
+           if (Electionloc.levelup == 0)
+           {
+              Console.Clear();
+              Intro();
+              Console.WriteLine("Your money: " + Money.amount);
+              Console.WriteLine("Your Username");
+              Voter_ID.username = Console.ReadLine();
+           
+              Console.WriteLine("Your Age");
+              Voter_ID.age = Convert.ToInt32(Console.ReadLine());
+           }
+           
+           if(Voter_ID.age < 12)
+           {
+                Console.WriteLine("You can't vote! 18+ only :).");
+           }
+           else
+           {
+           	  start:
+           	    Console.Clear();
+           	    if (Electionloc.levelup == 0)
+           	    {
+           	    	Voter_ID.VoterId();
+           	    	Electionloc.levelup++;
+           	    }
+           	    Console.Clear();
+           	    var numGen = new Random();
+           	    int personalspending = numGen.Next(0, 100);
+           	    Money.amount -= personalspending;
+           	    Console.WriteLine("Your money: " + Money.amount + ". Your reputation: 0");
+           	    Console.WriteLine("(Vote|Shop|Change|Voter id|Exit)");
+           	    string choose = Console.ReadLine();
+           	  
+           	    if (choose == "Vote") 
+           	    {
+           	        Console.WriteLine("Give your Voter ID.");
+           	
+           	        string givecard = Console.ReadLine();
+           	        int _givecard;
+           	        int.TryParse(givecard, out _givecard);
+           	
+           	        if (_givecard == Voter_ID.code)
+           	        {
+           		        Option(); //method for Option
+           		        Vote.yourvote();
+           		        
+           		        if (Vote.startElection)
+           		        {
+           			        Console.Clear();
+           			        Console.WriteLine("Hey buddy! the results are coming. let's see who wins.");
+           			        Electionloc.locations();
+           			        
+           			        if (Vote.unknownvote)
+           			        {
+           				        Console.WriteLine(Voter_ID.username + " is the leader of " + party6.name + ".");
+           				        party6.sname = Vote.vote;
+           				        party6.active = true;
+           			        }
+           		        }
+           		        
+        	            if (Vote.unknownvote)
+        	            {
+        	        	    party6.score = numGen.Next(1, 50000);
+        	        	    party6.score += ability1.amount;
+        	        	    Console.WriteLine(party6.score + " Voted for " + party6.sname);
+                            party1.score = numGen.Next(1, 50000);
+        	                Console.WriteLine(party1.score + " Voted for KJP");
+        	                party2.score = numGen.Next(1, 50000);
+                   	        Console.WriteLine(party2.score + " Voted for ABP");
+           	                party3.score = numGen.Next(1, 50000);
+                  	        Console.WriteLine(party3.score + " Voted for CPK");
+                       	    party4.score = numGen.Next(1, 50000);
+                 	        Console.WriteLine(party4.score + " Voted for KNP");
+                 	        party5.score = numGen.Next(1, 50000);
+                 	        Console.WriteLine(party5.score + " Voted for PPP");
+        	            }
+        	            else
+        	            {
+        	                party1.score = numGen.Next(1, 50000);
+        	                Console.WriteLine(party1.score + " Voted for KJP");
+        	                party2.score = numGen.Next(1, 50000);
+                   	        Console.WriteLine(party2.score + " Voted for ABP");
+           	                party3.score = numGen.Next(1, 50000);
+                  	        Console.WriteLine(party3.score + " Voted for CPK");
+                     	    party4.score = numGen.Next(1, 50000);
+                 	        Console.WriteLine(party4.score + " Voted for KNP");
+                 	        party5.score = numGen.Next(1, 50000);
+                 	        Console.WriteLine(party5.score + " Voted for PPP");
+        	            }
+        	        
+                        Party winner = parties.OrderByDescending(Party => Party.score).First();
+                 	    
+                 	    if (winner.active)
+                 	    {
+                 		    Console.WriteLine("-------------------------------------");
+                 	        Console.WriteLine(winner.name + " has won the election by " + winner.score + " votes.");
+                 	        Console.WriteLine("-------------------------------------");
+                 	        if (winner.sname == Vote.vote && Vote.unknownvote)
+                 	        {
+                 	        	Money.amount += numGen.Next(2000, 13000);
+                 	        	Console.WriteLine("You are prime minister of " + Electionloc.currentloc);
+                 	        }
+                 	        else if (winner.sname == Vote.vote)
+                 	        {
+                 	    	    Money.amount += 230;
+                 	    	    Console.WriteLine("Your voted party has won. You gained 230 bucks!");
+                 	    	    Console.WriteLine("-------------------------------------");
+                 	        }
+                 	        else
+                 	        {
+                 	       	    Console.WriteLine(party6.sname + " didn't won the election.");
+                 	       	    Console.WriteLine("Try next time.");
+                 	       	    Console.WriteLine("-------------------------------------");
+                 	        }
+                 	    }
+                 	    else
+                 	    {
+                 		    Console.WriteLine(winner.name + " isn't active!");
+                        }
+           	    
+        	            Console.WriteLine("(Main menu)");
+        	        
+           		        string ans2 = Console.ReadLine();
+           		        if (ans2 == "")
+           		        {
+           		    	    Console.WriteLine("Round 2");
+           		    	    goto start;
+           		        }
+           		        
+           	        }
+           	        else if (givecard == "Nahi hai" || givecard == "I don't have that")
+                    {
+           		        Console.WriteLine("Tho karna");
+           	        }
+           	        else if (givecard == "Nahi" || givecard == "No")
+           	        {
+           		        Console.WriteLine("Abe c#utiya hai kya?");
+           		        Console.WriteLine("Get out!");
+           	        }
+           	        else
+           	        {
+           	        	goto start;
+           	        }
+           
+           	    }
+           	    else if (choose == "Shop")
+           	    {
+           	  	    Console.WriteLine("Welcome to the shop.");
+           	  	    Console.WriteLine("What would you like to buy?");
+           	  	    Console.WriteLine("Fake vote");
+           	  	    string chooseabilities = Console.ReadLine();
+           	  	  
+           	  	    if (chooseabilities == "Fake vote")
+           	  	    {
+           	  	  	   Console.WriteLine("How many do you want?");
+           	  	  	   int amount = Convert.ToInt32(Console.ReadLine());
+           	  	  	 
+           	  	  	   Money.amount -= amount;
+           	  	  	   ability1.active = true;
+           	  	  	   ability1.amount += amount;
+           	  	  	   goto start;
+           	  	    }
+           	    }
+           	    else if (choose == "Change")
+           	    {
+           	    	if (Vote.unknownvote)
+           	    	{
+           	    	    Console.WriteLine("Write full name of party.");
+           	    	    Vote._fullname = Console.ReadLine();
+           	    	    Console.WriteLine("Write short name.");
+           	    	    Vote._shortname = Console.ReadLine();
+           	    	    goto start;
+           	    	}
+           	    	else
+           	    	{
+           	    		Console.WriteLine("There is nothing to change.");
+           	    	}
+           	    }
+           	    else if (choose == "Voter id")
+           	    {
+           	    	Voter_ID.VoterId();
+           	    	goto start;
+           	    }
+           	    else if (choose == "Exit")
+           	    {
+           	        Environment.Exit(1);
+           	    }
+           }
+        }
+        
+        public static void Intro()
+        {
+        	Console.WriteLine("Welcome to the most unbiased fictional political game ever... maybe little bias.");
+            Console.WriteLine("Created by Ghosh.");
+        }
+        
+        public static void Option()
+        {
+        	Console.Clear();
+        	Console.WriteLine("Welcome!");
+            Console.WriteLine("Who do you want to vote?");
+            Console.WriteLine("-------------------------------------");
+            Console.WriteLine("KJP = Kuserati Janata Party");
+           	Console.WriteLine("-------------------------------------");
+           	Console.WriteLine("ABP = Atmanirbhar Party");
+           	Console.WriteLine("-------------------------------------");
+           	Console.WriteLine("CPK = Communist Party of Kuserat");
+           	Console.WriteLine("-------------------------------------");
+           	Console.WriteLine("KNP = Kuserati National Party");
+           	Console.WriteLine("-------------------------------------");
+           	Console.WriteLine("PPP = People's Party");
+           	Console.WriteLine("-------------------------------------");
+           	if (Vote.unknownvote)
+           	{
+           	    Console.WriteLine(Vote._shortname + " = " + Vote._fullname + "(Your party)");
+           	}
+           	else
+           	{
+           		Console.WriteLine("Vote custom (Create your own party)");
+           	}
+           	Console.WriteLine("-------------------------------------");
+        }
+       
+    }  
+}
